@@ -1,0 +1,12 @@
+<!--
+  ~ Created by Mohamed Bushra on 07/12/16 22:09
+  ~ Copyright (c) 2016. All rights reserved.
+  ~
+  ~  Last modified 07/12/16 21:21
+  -->
+
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+</resources>

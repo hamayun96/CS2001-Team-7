@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by Mohamed Bushra on 07/12/16 22:09
+  ~ Copyright (c) 2016. All rights reserved.
+  ~
+  ~  Last modified 07/12/16 21:53
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="uk.ac.brunel.tunel">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        //The 1st activity shows the splash screen
+        <activity
+            android:name=".SplashScreenActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        //The 2nd activity takes you to the main screen where you can
+        //choose to sign in on register as a new user
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+
+        <intent-filter>
+            <action android:name="uk.ac.brunel.tunel.MainActivity" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+
+        <activity
+            android:name=".SignInActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".BrunelPortalLoginActivity"></activity>
+    </application>
+
+</manifest>
