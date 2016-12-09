@@ -1,8 +1,8 @@
 <!--
-  ~ Created by Mohamed Bushra on 07/12/16 22:09
+  ~ Created by Mohamed Bushra on 09/12/16 12:03
   ~ Copyright (c) 2016. All rights reserved.
   ~
-  ~  Last modified 07/12/16 21:21
+  ~ Last Modified 09/12/16 12:03.
   -->
 
 <resources>
@@ -10,4 +10,8 @@
     <string name="sign_in">Sign In</string>
     <string name="password">Password</string>
     <string name="tunellogo">tunellogo</string>
+    <string name="email">Email</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="log_in">Log In</string>
+    <string name="sign_up">Sign Up</string>
 </resources>

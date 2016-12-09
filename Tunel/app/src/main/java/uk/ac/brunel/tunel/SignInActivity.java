@@ -1,8 +1,8 @@
 /*
- * Created by Mohamed Bushra on 07/12/16 22:09
+ * Created by Mohamed Bushra on 09/12/16 12:03
  * Copyright (c) 2016. All rights reserved.
  *
- *  Last modified 07/12/16 21:21
+ * Last Modified 09/12/16 12:03.
  */
 
 package uk.ac.brunel.tunel;
@@ -41,6 +41,17 @@ public class SignInActivity extends AppCompatActivity {
                     Toast.makeText(SignInActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
                 }
 
+            }
+        });
+
+
+        Button signup = (Button)findViewById(R.id.sign_up);
+        signup.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                //Sends user to Brunel Portal to sign up using student ID
             }
         });
     }

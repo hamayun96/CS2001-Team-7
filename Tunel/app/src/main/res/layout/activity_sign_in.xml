@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Mohamed Bushra on 07/12/16 22:09
+  ~ Created by Mohamed Bushra on 09/12/16 12:03
   ~ Copyright (c) 2016. All rights reserved.
   ~
-  ~  Last modified 07/12/16 22:08
+  ~ Last Modified 09/12/16 12:03.
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -36,7 +36,7 @@
         android:layout_width="800dp"
         android:layout_height="40dp"
         android:inputType="textEmailAddress"
-        android:hint="  Email"
+        android:hint="@string/email"
         android:ems="10"
         android:id="@+id/etUsername"
         android:layout_marginBottom="12dp"
@@ -44,10 +44,9 @@
         android:layout_alignParentStart="true" />
 
     <Button
-        style="@style/Widget.AppCompat.Button.Colored"
         android:background="#2471A3"
-        android:text="Log In"
-        android:textSize="20dp"
+        android:text="@string/log_in"
+        android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="#fff"
         android:layout_width="800dp"
@@ -57,8 +56,20 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
 
+    <Button
+        android:background="@android:color/transparent"
+        android:text="@string/sign_up"
+        android:textStyle="italic"
+        android:textColor="#2471A3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sign_up"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
     <TextView
-        android:text="Forgot Password?"
+        android:text="@string/forgot_password"
+        android:textSize="16sp"
         android:textStyle="italic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -68,17 +79,6 @@
         android:layout_above="@+id/login"
         android:layout_alignParentStart="true" />
 
-    <TextView
-        android:text="Register Now"
-        android:textStyle="italic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/forgotpassword"
-        android:layout_alignBottom="@+id/forgotpassword"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="11dp"
-        android:id="@+id/textView2" />
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="260dp"
@@ -87,5 +87,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:contentDescription="@string/tunellogo"/>
+
+
+
 
 </RelativeLayout>
