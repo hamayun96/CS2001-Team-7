@@ -1,21 +1,23 @@
 /*
- * Created by Mohamed Bushra on 09/12/16 12:03
- * Copyright (c) 2016. All rights reserved.
+ * Created by Mohamed Bushra on 17/01/17 12:59
+ * Copyright (c) 2017. All rights reserved.
  *
- * Last Modified 09/12/16 12:03.
+ * Last Modified 14/01/17 19:42.
  */
 
-package uk.ac.brunel.tunel;
+package uk.ac.brunel.tunel.activity;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.*;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+import uk.ac.brunel.tunel.R;
+
+import static uk.ac.brunel.tunel.R.id.sign_up;
+
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         userSignIn.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View view)
+            public void onClick(View v)
             {
                 /* Setting a new intent which takes the user from the current screen
                 to the next (Main --> Sign in screen)
@@ -38,6 +40,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(SignInIntent);
             }
 
+        });
+
+        Button userSignUp = (Button)findViewById(sign_up);
+        userSignUp.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                /* Setting a new intent which takes the user from the current screen
+                to the next (Sign in --> Sign up screen)
+                 */
+                Intent RegisterIntent = new Intent(MainActivity.this, RegisterActivity.class);
+                startActivity(RegisterIntent);
+
+            }
         });
     }
 

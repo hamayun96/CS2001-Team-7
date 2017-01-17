@@ -1,8 +1,8 @@
 <!--
-  ~ Created by Mohamed Bushra on 09/12/16 12:03
-  ~ Copyright (c) 2016. All rights reserved.
+  ~ Created by Mohamed Bushra on 17/01/17 12:59
+  ~ Copyright (c) 2017. All rights reserved.
   ~
-  ~ Last Modified 09/12/16 12:03.
+  ~ Last Modified 14/01/17 17:22.
   -->
 
 <resources>
@@ -14,4 +14,35 @@
     <string name="forgot_password">Forgot Password?</string>
     <string name="log_in">Log In</string>
     <string name="sign_up">Sign Up</string>
+    <string name="reg_form">Registration Form</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="full_name">Full Name</string>
+    <string name="student_id">Student ID</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="register">Register</string>
+    <string name="sign_up_for_tun_l">Sign up for Tunél</string>
+
+
+    <string-array name="course_level">
+        <item>Select your course level</item>
+        <item>Computer Science - Foundation</item>
+               
+        <item>Computer Science - Year 1</item>
+               
+        <item>Computer Science - Year 2</item>
+               
+        <item>Computer Science - Placement</item>
+               
+        <item>Computer Science - Year 3</item>
+               
+        <item>Computer Science - Masters</item>
+    </string-array>
+
+    <string-array name="gta_pal">
+        <item>PAL Member</item>
+        <item>GTA</item>
+    </string-array>
+
+
 </resources>

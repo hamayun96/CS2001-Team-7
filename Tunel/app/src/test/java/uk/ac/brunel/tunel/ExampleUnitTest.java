@@ -1,15 +1,15 @@
 /*
- * Created by Mohamed Bushra on 09/12/16 12:03
- * Copyright (c) 2016. All rights reserved.
+ * Created by Mohamed Bushra on 17/01/17 12:59
+ * Copyright (c) 2017. All rights reserved.
  *
- * Last Modified 09/12/16 12:03.
+ * Last Modified 17/01/17 10:47.
  */
 
 package uk.ac.brunel.tunel;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Example local unit test, which will execute on the development machine (host).

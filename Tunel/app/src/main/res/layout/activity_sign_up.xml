@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Mohamed Bushra on 17/01/17 12:59
+  ~ Copyright (c) 2017. All rights reserved.
+  ~
+  ~ Last Modified 17/01/17 12:49.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#EBF6FF">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="190dp"
+            app:srcCompat="@drawable/logononame"
+            android:id="@+id/register_logo"
+            android:contentDescription="@string/tunellogo"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="@string/sign_up_for_tun_l"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            android:id="@+id/register"
+            android:layout_below="@+id/register_logo"
+            android:layout_centerHorizontal="true" />
+
+        <EditText
+            android:background="#FEFDFE"
+            android:layout_width="300dp"
+            android:layout_height="35dp"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/fullName"
+            android:hint="  Full Name"
+            android:maxLines="1"
+            android:layout_below="@+id/register"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="50dp"
+            android:layout_marginTop="30dp"
+            tools:ignore="HardcodedText" />
+
+
+        <Button
+            android:background="#2471A3"
+            android:text="@string/sign_up"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:layout_width="250dp"
+            android:layout_height="55dp"
+            android:id="@+id/singup_button"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="27dp" />
+
+        <EditText
+            android:background="#FEFDFE"
+            android:layout_width="300sp"
+            android:layout_height="35dp"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/user_pass"
+            android:hint=" Password"
+            tools:ignore="HardcodedText"
+            android:layout_above="@+id/singup_button"
+            android:layout_alignStart="@+id/register"
+            android:layout_marginBottom="22dp" />
+
+        <EditText
+            android:background="#FEFDFE"
+            android:layout_width="300dp"
+            android:layout_height="35dp"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/student_ID"
+            android:hint="  Student ID"
+            tools:ignore="HardcodedText"
+            android:layout_centerVertical="true"
+            android:layout_alignStart="@+id/fullName" />
+
+        <EditText
+            android:background="#FEFDFE"
+            android:layout_width="300dp"
+            android:layout_height="35dp"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/user_email"
+            android:hint="  Email"
+            tools:ignore="HardcodedText"
+            android:layout_marginBottom="10dp"
+            android:layout_above="@+id/user_pass"
+            android:layout_alignStart="@+id/user_pass" />
+
+        <Spinner
+            android:background="#FEFDFE"
+            android:layout_width="300dp"
+            android:layout_height="35dp"
+            android:id="@+id/user_course_level"
+            android:layout_above="@+id/user_email"
+            android:layout_alignStart="@+id/user_email"
+            android:layout_marginBottom="15dp" />
+
+
+</RelativeLayout>

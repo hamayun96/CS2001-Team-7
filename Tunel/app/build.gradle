@@ -1,8 +1,8 @@
 /*
- * Created by Mohamed Bushra on 09/12/16 12:03
- * Copyright (c) 2016. All rights reserved.
+ * Created by Mohamed Bushra on 17/01/17 12:59
+ * Copyright (c) 2017. All rights reserved.
  *
- * Last Modified 09/12/16 12:02.
+ * Last Modified 17/01/17 12:58.
  */
 
 apply plugin: 'com.android.application'
@@ -35,6 +35,8 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.0.1'
+    compile 'com.android.support:appcompat-v7:25.1.0'
     testCompile 'junit:junit:4.12'
+    compile 'com.android.support:design:25.1.0'
+    compile project (":volley")
 }

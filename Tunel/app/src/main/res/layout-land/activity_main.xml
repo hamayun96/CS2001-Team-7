@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Mohamed Bushra on 09/12/16 12:03
-  ~ Copyright (c) 2016. All rights reserved.
+  ~ Created by Mohamed Bushra on 17/01/17 12:59
+  ~ Copyright (c) 2017. All rights reserved.
   ~
-  ~ Last Modified 09/12/16 12:03.
+  ~ Last Modified 14/01/17 17:22.
   -->
 
 
@@ -17,7 +17,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="uk.ac.brunel.tunel.MainActivity"
+    tools:context="uk.ac.brunel.tunel.activity.MainActivity"
     android:orientation="vertical">
 
 
