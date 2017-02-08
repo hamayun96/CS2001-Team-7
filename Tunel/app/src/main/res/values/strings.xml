@@ -1,8 +1,8 @@
 <!--
-  ~ Created by Mohamed Bushra on 17/01/17 12:59
+  ~ Created by Mohamed Bushra on 08/02/17 17:02
   ~ Copyright (c) 2017. All rights reserved.
   ~
-  ~ Last Modified 14/01/17 17:22.
+  ~ Last Modified 08/02/17 15:15.
   -->
 
 <resources>
@@ -26,17 +26,8 @@
 
     <string-array name="course_level">
         <item>Select your course level</item>
-        <item>Computer Science - Foundation</item>
-               
-        <item>Computer Science - Year 1</item>
-               
-        <item>Computer Science - Year 2</item>
-               
-        <item>Computer Science - Placement</item>
-               
-        <item>Computer Science - Year 3</item>
-               
-        <item>Computer Science - Masters</item>
+        <item>Computer Science</item>
+
     </string-array>
 
     <string-array name="gta_pal">

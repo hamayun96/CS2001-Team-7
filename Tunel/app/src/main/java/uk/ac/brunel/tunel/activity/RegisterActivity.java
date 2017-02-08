@@ -1,52 +1,38 @@
 /*
- * Created by Mohamed Bushra on 17/01/17 12:59
+ * Created by Mohamed Bushra on 08/02/17 17:02
  * Copyright (c) 2017. All rights reserved.
  *
- * Last Modified 17/01/17 12:58.
+ * Last Modified 08/02/17 16:21.
  */
 
 package uk.ac.brunel.tunel.activity;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import uk.ac.brunel.tunel.R;
-import uk.ac.brunel.tunel.app.AppConfig;
-import uk.ac.brunel.tunel.app.AppController;
-import uk.ac.brunel.tunel.apphelper.SQLiteHandler;
-import uk.ac.brunel.tunel.apphelper.SessionManager;
 
 
-public class RegisterActivity extends Activity {
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private static final String TAG = RegisterActivity.class.getSimpleName();
-    private EditText userFullName;
-    private EditText userEmail;
-    private EditText userPassword;
-    private Spinner courseLevel;
-    private EditText studentID;
-    private ProgressDialog pDialog;
-    private SQLiteHandler db;
+    private Button btnSignup;
+    private EditText userEmail, userPassword, userPasswordVal;
+    private ProgressDialog progressDialog;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -54,176 +40,86 @@ public class RegisterActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        userFullName = (EditText) findViewById(R.id.fullName);
-        courseLevel = (Spinner) findViewById(R.id.user_course_level);
-        studentID = (EditText) findViewById(R.id.student_ID);
-        userEmail = (EditText) findViewById(R.id.user_email);
-        userPassword = (EditText) findViewById(R.id.user_pass);
-        Button btnSignup = (Button) findViewById(R.id.singup_button);
-        SessionManager session;
+        userEmail = (EditText) findViewById(R.id.reg_email);
+        userPassword = (EditText) findViewById(R.id.reg_pass);
+        userPasswordVal = (EditText) findViewById(R.id.reg_pass_val);
+        btnSignup = (Button) findViewById(R.id.reg_button);
 
-         /*
-        We are displaying/loading the String Array content and displaying it
-        in a simple spinner list
-           */
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.course_level,android.R.layout.simple_spinner_item);
+        mAuth = FirebaseAuth.getInstance();
+        btnSignup.setOnClickListener(this);
+        progressDialog = new ProgressDialog(this);
 
-        // I am specifying to use a dropdown list to use when the list is shown to the user
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // Here I am applying the adapter to my spinner
-        courseLevel.setAdapter(adapter);
-
-        // Progress dialog
-        pDialog = new ProgressDialog(this);
-        pDialog.setCancelable(false);
-
-        // Session manager
-        session = new SessionManager(getApplicationContext());
-
-        // SQLite database handler
-        db = new SQLiteHandler(getApplicationContext());
-
-        // Check if user is already logged in or not
-        if (session.isLoggedIn()) {
-            // User is already logged in. Take him to main activity
-            Intent intent = new Intent(RegisterActivity.this,
-                    ForumActivity.class);
-            startActivity(intent);
+        //Check if user is already logged in
+        if(mAuth.getCurrentUser() != null){
+            //Close current page and open forum activity
             finish();
+            startActivity(new Intent(getApplicationContext(), UserAccountActivity.class));
         }
 
-        btnSignup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                /*
-                    When the user clicks 'sign up' button we need to
-                    get all the information that they entered
-                 */
-                String name = userFullName.getText().toString().trim();
-                String email = userEmail.getText().toString().trim();
-                String studentid = studentID.getText().toString().trim();
-                String courselevel = courseLevel.getSelectedItem().toString().trim();
-                String password = userPassword.getText().toString().trim();
-
-
-                if (!name.isEmpty() && !email.isEmpty() && !password.isEmpty() &&
-                        !studentid.isEmpty() && !courselevel.isEmpty())
-                {
-                    registerUser(name, email, password, studentid, courselevel);
-                }
-                else
-                {
-                    Toast.makeText(getApplicationContext(),
-                            "Please enter your details!", Toast.LENGTH_LONG)
-                            .show();
-                }
-
-            }
-        });
-
     }
 
+    private void registerUser() {
+        String email = userEmail.getText().toString().trim();
+        String password = userPassword.getText().toString().trim();
+        String password_val = userPasswordVal.getText().toString().trim();
 
-    /**
-     * Function to store user in MySQL database will post params(tag, name,
-     * email, password) to register url
-     * */
-    private void registerUser(final String name, final String email,
-                              final String password, final String studentid, final String courselevel) {
-        // Tag used to cancel the request
-        String tag_string_req = "req_register";
+        //Check if the fields email and/or password are empty
+        if(TextUtils.isEmpty(email)){
+            Toast.makeText(this,"Please enter a email",Toast.LENGTH_LONG).show();
+            return;
+        }
 
-        pDialog.setMessage("Registering ...");
-        showDialog();
+        if(TextUtils.isEmpty(password)){
+            Toast.makeText(this,"Please enter a password",Toast.LENGTH_LONG).show();
+            return;
+        }
 
-        StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_REGISTER, new Response.Listener<String>() {
+        //Validate the password entered by the user
+        if(!password_val.equals(password))
+        {
+            Toast.makeText(this,"Passwords don't match",Toast.LENGTH_LONG).show();
+            return;
+        }
 
-            @Override
-            public void onResponse(String response) {
-                int d = Log.d(TAG, "Register Response: " + response.toString());
-                hideDialog();
+        progressDialog.setMessage("Registering Please Wait...");
+        progressDialog.show();
 
-                try {
-                    JSONObject jObj = new JSONObject(response);
-                    boolean error = jObj.getBoolean("error");
-                    if (!error) {
-                        // User successfully stored in MySQL
-                        // Now store the user in sqlite
-                        String uid = jObj.getString("uid");
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        /*
+                        Checking if user has successfully registered
+                         */
+                        if(task.isSuccessful()){
+                            Toast.makeText(RegisterActivity.this,"Successfully registered",
+                                    Toast.LENGTH_LONG).show();
+                            // Launch login activity
+                            Intent intent = new Intent(
+                                    RegisterActivity.this,
+                                    SignInActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }else{
 
-                        JSONObject user = jObj.getJSONObject("user");
-                        String name = user.getString("name");
-                        String email = user.getString("email");
-                        String student_id = user.getString("student ID");
-                        String course_level = user.getString("course level");
-
-                        // Inserting row in users table
-                        db.addUser(uid, name, email, student_id, course_level);
-
-                        Toast.makeText(getApplicationContext(), "User successfully registered. Try login now!", Toast.LENGTH_LONG).show();
-
-                        // Launch login activity
-                        Intent intent = new Intent(
-                                RegisterActivity.this,
-                                SignInActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-
-                        // Error occurred in registration. Get the error
-                        // message
-                        String errorMsg = jObj.getString("error_msg");
-                        Toast.makeText(getApplicationContext(),
-                                errorMsg, Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterActivity.this,"Registration failed",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                        progressDialog.dismiss();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                });
 
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Registration Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_LONG).show();
-                hideDialog();
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() {
-                // Posting params to register url
-                Map<String, String> params = new HashMap<>();
-                params.put("name", name);
-                params.put("email", email);
-                params.put("password", password);
-                params.put("student ID", studentid);
-                params.put("course level", courselevel);
-
-
-                return params;
-            }
-
-        };
-
-        // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
-    private void showDialog() {
-        if (!pDialog.isShowing())
-            pDialog.show();
+    @Override
+    public void onClick(View v) {
+        if(v == btnSignup)
+        {
+            registerUser();
+        }
+
     }
 
-    private void hideDialog() {
-        if (pDialog.isShowing())
-            pDialog.dismiss();
-    }
 
 
 

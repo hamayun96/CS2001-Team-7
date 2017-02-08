@@ -1,15 +1,15 @@
 /*
- * Created by Mohamed Bushra on 17/01/17 12:59
+ * Created by Mohamed Bushra on 08/02/17 17:02
  * Copyright (c) 2017. All rights reserved.
  *
- * Last Modified 17/01/17 10:47.
+ * Last Modified 08/02/17 15:15.
  */
 
 package uk.ac.brunel.tunel.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import uk.ac.brunel.tunel.R;
 
@@ -17,7 +17,7 @@ import uk.ac.brunel.tunel.R;
  * Created by Mohamed Bushra on 05/12/2016.
  */
 
-public class SplashScreenActivity extends Activity {
+public class SplashScreenActivity extends AppCompatActivity {
 
 
     @Override

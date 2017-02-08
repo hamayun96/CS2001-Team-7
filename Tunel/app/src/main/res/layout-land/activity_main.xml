@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Mohamed Bushra on 17/01/17 12:59
+  ~ Created by Mohamed Bushra on 08/02/17 17:02
   ~ Copyright (c) 2017. All rights reserved.
   ~
-  ~ Last Modified 14/01/17 17:22.
+  ~ Last Modified 08/02/17 15:15.
   -->
 
 
@@ -24,7 +24,7 @@
     <ImageView
         android:layout_width="1000sp"
         android:layout_height="200sp"
-        app:srcCompat="@drawable/tunellogo"
+        app:srcCompat="@mipmap/tunellogo"
         android:id="@+id/tunellogo"
         android:contentDescription="Tunel Logo"
         android:layout_alignParentTop="true"
@@ -40,7 +40,7 @@
         android:id="@+id/sign_in"
         android:layout_below="@+id/tunellogo"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="7dp" />
+        android:layout_marginTop="27dp" />
 
     <TextView
         android:text="New user? Register here"

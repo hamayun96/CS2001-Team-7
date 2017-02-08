@@ -1,34 +1,52 @@
 /*
- * Created by Mohamed Bushra on 17/01/17 12:59
+ * Created by Mohamed Bushra on 08/02/17 17:02
  * Copyright (c) 2017. All rights reserved.
  *
- * Last Modified 14/01/17 19:42.
+ * Last Modified 08/02/17 15:15.
  */
 
 package uk.ac.brunel.tunel.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import uk.ac.brunel.tunel.R;
 
 import static uk.ac.brunel.tunel.R.id.sign_up;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
+
+    private Button ButtonSignIn;
+    private Button ButtonSignUp;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mAuth = FirebaseAuth.getInstance();
+
+        // Check if user is already logged in
+        if(mAuth.getCurrentUser() != null){
+            /*
+              If user is logged in, close this activity
+              and direct user to the forum
+             */
+            finish();
+            startActivity(new Intent(getApplicationContext(), UserAccountActivity.class));
+        }
+
         /*Assigning the 'Sign in' button to a click listener
         so it takes the user to the next screen
          */
-        Button userSignIn = (Button) findViewById(R.id.sign_in);
-        userSignIn.setOnClickListener(new View.OnClickListener()
+        ButtonSignIn = (Button) findViewById(R.id.sign_in);
+        ButtonSignIn.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -42,8 +60,8 @@ public class MainActivity extends Activity {
 
         });
 
-        Button userSignUp = (Button)findViewById(sign_up);
-        userSignUp.setOnClickListener(new View.OnClickListener()
+        ButtonSignUp = (Button)findViewById(sign_up);
+        ButtonSignUp.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
             {

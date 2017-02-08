@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Created by Mohamed Bushra on 17/01/17 12:59
+  ~ Created by Mohamed Bushra on 08/02/17 17:02
   ~ Copyright (c) 2017. All rights reserved.
   ~
-  ~ Last Modified 17/01/17 12:08.
+  ~ Last Modified 08/02/17 15:15.
   -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="uk.ac.brunel.tunel">
@@ -10,7 +10,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="uk.ac.brunel.tunel.app.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -18,35 +17,36 @@
         android:theme="@style/AppTheme">
         //The 1st activity shows the splash screen
         <activity
+
             android:name=".activity.SplashScreenActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:launchMode="singleTop"
-            android:windowSoftInputMode="adjustPan">
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="uk.ac.brunel.tunel.activity.MainActivity"
+                    />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
+
         //The 2nd activity takes you to the main screen where you can
         //choose to sign in on register as a new user
         <activity
             android:name=".activity.MainActivity"
-            android:label="@string/app_name"
-            android:launchMode="singleTop"
-            android:windowSoftInputMode="adjustPan"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".activity.RegisterActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:label="@string/app_name"
-            android:launchMode="singleTop"
-            android:windowSoftInputMode="adjustPan"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".activity.SignInActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:label="@string/app_name"
-            android:launchMode="singleTop"
-            android:windowSoftInputMode="adjustPan"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activity.UserAccountActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>

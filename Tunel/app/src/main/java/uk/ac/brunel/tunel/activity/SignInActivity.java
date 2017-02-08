@@ -1,207 +1,135 @@
 /*
- * Created by Mohamed Bushra on 17/01/17 12:59
+ * Created by Mohamed Bushra on 08/02/17 17:02
  * Copyright (c) 2017. All rights reserved.
  *
- * Last Modified 17/01/17 12:58.
+ * Last Modified 08/02/17 15:15.
  */
 
 package uk.ac.brunel.tunel.activity;
 
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import uk.ac.brunel.tunel.R;
-import uk.ac.brunel.tunel.app.AppConfig;
-import uk.ac.brunel.tunel.app.AppController;
-import uk.ac.brunel.tunel.apphelper.SQLiteHandler;
-import uk.ac.brunel.tunel.apphelper.SessionManager;
 
-import static uk.ac.brunel.tunel.R.id.sign_up;
+import static uk.ac.brunel.tunel.R.id.signup_button;
 
 
-public class SignInActivity extends Activity {
+public class SignInActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private static final String TAG = RegisterActivity.class.getSimpleName();
     private Button btnLogin;
     private Button btnSignup;
     private EditText userEmail;
     private EditText userPassword;
     private ProgressDialog pDialog;
-    private SessionManager session;
-    private SQLiteHandler db;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        userEmail = (EditText) findViewById(R.id.etUsername);
-        userPassword = (EditText) findViewById(R.id.etPassword);
-        btnLogin = (Button) findViewById(R.id.login);
-        btnSignup = (Button) findViewById(sign_up);
+        userEmail = (EditText) findViewById(R.id.log_email);
+        userPassword = (EditText) findViewById(R.id.log_pass);
+        btnLogin = (Button) findViewById(R.id.log_button);
+        btnSignup = (Button) findViewById(signup_button);
+
+        btnLogin.setOnClickListener(this);
 
         // Progress dialog
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
 
-        // SQLite database handler
-        db = new SQLiteHandler(getApplicationContext());
+        mAuth = FirebaseAuth.getInstance();
 
-        // Session manager
-        session = new SessionManager(getApplicationContext());
-
-        // Check if user is already logged in or not
-        if (session.isLoggedIn()) {
-            // User is already logged in. Take user to forum page
-            Intent intent = new Intent(SignInActivity.this, ForumActivity.class);
-            startActivity(intent);
+        // Check if user is already logged in
+        if(mAuth.getCurrentUser() != null){
+            /*
+              If user is logged in, close this activity
+              and direct user to the forum
+             */
             finish();
+            startActivity(new Intent(getApplicationContext(), UserAccountActivity.class));
         }
 
-        // Login button Click Event
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        btnSignup.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                /* Setting a new intent which takes the user from the current screen
+                to the next (Sign in --> Sign up screen)
+                 */
+                Intent RegisterIntent = new Intent(SignInActivity.this, RegisterActivity.class);
+                startActivity(RegisterIntent);
 
-            public void onClick(View view) {
-                String email = userEmail.getText().toString().trim();
-                String password = userPassword.getText().toString().trim();
-
-                // Check for empty data in the form
-                if (!email.isEmpty() && !password.isEmpty()) {
-                    // login user
-                    checkLogin(email, password);
-                } else {
-                    // Prompt user to enter credentials
-                    Toast.makeText(getApplicationContext(),
-                            "Please enter yout details!", Toast.LENGTH_LONG)
-                            .show();
-                }
-            }
-
-        });
-
-        // Link to Register page
-        btnSignup.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(),
-                        RegisterActivity.class);
-                startActivity(i);
-                finish();
             }
         });
+
     }
 
-    /**
-     * function to verify login details in mysql db
-     */
-    private void checkLogin(final String email, final String password) {
-        // Tag used to cancel the request
-        String tag_string_req = "req_login";
+    private void userSignIn()
+    {
+        String email = userEmail.getText().toString().trim();
+        String password = userPassword.getText().toString().trim();
 
-        pDialog.setMessage("Logging in ...");
-        showDialog();
+        //Check if the fields email and/or password are empty
+        if(TextUtils.isEmpty(email)){
+            Toast.makeText(this,"Please enter your email",Toast.LENGTH_LONG).show();
+            return;
+        }
 
-        StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_LOGIN, new Response.Listener<String>() {
+        if(TextUtils.isEmpty(password)){
+            Toast.makeText(this,"Please enter your password",Toast.LENGTH_LONG).show();
+            return;
+        }
 
-            @Override
-            public void onResponse(String response) {
-                int d = Log.d(TAG, "Login Response: " + response.toString());
-                hideDialog();
+        pDialog.setMessage("Login in...");
+        pDialog.show();
 
-                try {
-                    JSONObject jObj = new JSONObject(response);
-                    boolean error = jObj.getBoolean("error");
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        pDialog.dismiss();
+                        /*
+                        If the user signs in successfully
+                        we direct them to the forum activity
+                         */
+                        if(task.isSuccessful()){
+                            finish();
+                            startActivity(new Intent(getApplicationContext(),
+                                    UserAccountActivity.class));
+                        }
 
-                    // Check for error node in json
-                    if (!error) {
-                        // user successfully logged in
-                        // Create login session
-                        session.setLogin(true);
+                        else if (!task.isSuccessful())
+                        {
 
-                        // Now store the user in SQLite
-                        String uid = jObj.getString("uid");
-
-                        JSONObject user = jObj.getJSONObject("user");
-                        String name = user.getString("name");
-                        String email = user.getString("email");
-                        String student_id = user.getString("student ID");
-                        String course_level = user.getString("course level");
-
-                        // Inserting row in users table
-                        db.addUser(name, email, uid, student_id, course_level);
-
-                        // Launch forum activity
-                        Intent intent = new Intent(SignInActivity.this,
-                                ForumActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        // Error in login. Get the error message
-                        String errorMsg = jObj.getString("error_msg");
-                        Toast.makeText(getApplicationContext(),
-                                errorMsg, Toast.LENGTH_LONG).show();
+                        }
                     }
-                } catch (JSONException e) {
-                    // JSON error
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                }
+                });
 
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Login Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_LONG).show();
-                hideDialog();
-            }
-        }) {
-
-            @Override
-            protected Map<String, String> getParams() {
-                // Posting parameters to login url
-                Map<String, String> params = new HashMap<>();
-                params.put("email", email);
-                params.put("password", password);
-
-                return params;
-            }
-
-        };
-        // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
-    private void showDialog() {
-        if (!pDialog.isShowing())
-            pDialog.show();
-    }
+    @Override
+    public void onClick(View v) {
+        if (v == btnLogin) {
+            userSignIn();
+        }
 
-    private void hideDialog() {
-        if (pDialog.isShowing())
-            pDialog.dismiss();
     }
 
 }

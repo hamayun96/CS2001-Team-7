@@ -1,23 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Mohamed Bushra on 17/01/17 12:59
+  ~ Created by Mohamed Bushra on 08/02/17 17:02
   ~ Copyright (c) 2017. All rights reserved.
   ~
-  ~ Last Modified 14/01/17 19:46.
+  ~ Last Modified 08/02/17 15:15.
   -->
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="#EBF6FF">
+    android:background="#FFFFFF"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="900dp"
         tools:ignore="ScrollViewSize">
 
+
+        <ImageView
+            android:layout_width="400dp"
+            android:layout_height="95dp"
+            app:srcCompat="@mipmap/logononame"
+            android:id="@+id/register_logo"
+            android:contentDescription="@string/tunellogo"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
         <TextView
+            android:textColor="#2471A3"
             android:text="Sign up for Tunél"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,76 +40,45 @@
             android:layout_centerHorizontal="true" />
 
         <EditText
-            android:background="#FEFDFE"
-            android:layout_width="300dp"
-            android:layout_height="35dp"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/fullname"
-            android:hint="  Full Name"
-            android:maxLines="1"
-            android:layout_marginTop="30dp"
-            android:layout_below="@+id/register"
-            android:layout_centerHorizontal="true"
-            tools:ignore="HardcodedText" />
-
-        <ImageView
-            android:layout_width="400dp"
-            android:layout_height="95dp"
-            app:srcCompat="@drawable/logononame"
-            android:id="@+id/register_logo"
-            android:contentDescription="@string/tunellogo"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
-
-
-        <Spinner
-            android:background="#FEFDFE"
-            android:layout_width="300dp"
-            android:layout_height="35dp"
-            android:id="@+id/user_course_level"
-            android:layout_marginTop="30dp"
-            android:layout_below="@+id/user_ID"
-            android:layout_alignStart="@+id/user_ID" />
-
-        <EditText
-            android:background="#FEFDFE"
-            android:layout_width="300dp"
-            android:layout_height="35dp"
-            android:inputType="number"
-            android:ems="10"
-            android:id="@+id/user_ID"
-            android:hint="  Student ID"
-            android:layout_marginTop="30dp"
-            android:layout_below="@+id/fullname"
-            android:layout_alignStart="@+id/fullname"
-            tools:ignore="HardcodedText" />
-
-        <EditText
-            android:background="#FEFDFE"
+            android:background="#F9F9F9"
             android:layout_width="300dp"
             android:layout_height="35dp"
             android:inputType="textEmailAddress"
             android:ems="10"
-            android:id="@+id/user_email"
+            android:id="@+id/reg_email"
             android:hint="  Email"
             tools:ignore="HardcodedText"
-            android:layout_marginTop="30dp"
-            android:layout_below="@+id/user_course_level"
-            android:layout_alignStart="@+id/user_ID" />
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/register"
+            android:layout_centerHorizontal="true" />
 
         <EditText
-            android:background="#FEFDFE"
+            android:background="#F9F9F9"
             android:layout_width="300sp"
             android:layout_height="35dp"
             android:inputType="textPassword"
             android:ems="10"
-            android:id="@+id/user_pass"
-            android:hint="  Password"
+            android:id="@+id/reg_pass_val"
+            android:hint=" Re-type Password"
             tools:ignore="HardcodedText"
-            android:layout_marginTop="30dp"
-            android:layout_below="@+id/user_email"
-            android:layout_alignStart="@+id/user_email" />
+            android:layout_marginTop="16dp"
+            android:layout_below="@+id/reg_pass"
+            android:layout_alignStart="@+id/reg_pass" />
+
+        <EditText
+            android:background="#F9F9F9"
+            android:layout_width="300sp"
+            android:layout_height="35dp"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/reg_pass"
+            android:hint=" Password"
+            tools:ignore="HardcodedText"
+            android:layout_marginEnd="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/reg_email"
+            android:layout_alignStart="@+id/reg_email" />
+
 
 
         <Button
@@ -110,7 +91,7 @@
             android:layout_height="55dp"
             android:id="@+id/singup_button"
             android:layout_marginTop="40dp"
-            android:layout_below="@+id/user_pass"
+            android:layout_below="@+id/reg_pass_val"
             android:layout_centerHorizontal="true" />
 
 
