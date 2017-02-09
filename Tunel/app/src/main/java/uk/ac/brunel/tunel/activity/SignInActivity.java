@@ -1,8 +1,8 @@
 /*
- * Created by Mohamed Bushra on 09/02/17 20:36
+ * Created by Mohamed Bushra on 09/02/17 21:13
  * Copyright (c) 2017. All rights reserved.
  *
- * Last Modified 09/02/17 20:36.
+ * Last Modified 09/02/17 21:12.
  */
 
 package uk.ac.brunel.tunel.activity;
@@ -63,7 +63,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
               and direct user to the forum
              */
             finish();
-            startActivity(new Intent(getApplicationContext(), UserAccountActivity.class));
+            startActivity(new Intent(getApplicationContext(), UserProfileActivity.class));
         }
 
         btnSignup.setOnClickListener(new View.OnClickListener()
@@ -113,7 +113,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                         if(task.isSuccessful()){
                             finish();
                             startActivity(new Intent(getApplicationContext(),
-                                    UserAccountActivity.class));
+                                    UserProfileActivity.class));
                         }
 
                         else if(!task.isSuccessful())

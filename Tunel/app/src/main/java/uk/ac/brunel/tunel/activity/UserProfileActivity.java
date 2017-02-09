@@ -1,8 +1,8 @@
 /*
- * Created by Mohamed Bushra on 09/02/17 20:36
+ * Created by Mohamed Bushra on 09/02/17 21:13
  * Copyright (c) 2017. All rights reserved.
  *
- * Last Modified 09/02/17 18:45.
+ * Last Modified 09/02/17 21:12.
  */
 
 package uk.ac.brunel.tunel.activity;
@@ -25,7 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import uk.ac.brunel.tunel.R;
 
-public class UserAccountActivity extends AppCompatActivity implements View.OnClickListener{
+public class UserProfileActivity extends AppCompatActivity implements View.OnClickListener{
 
     private EditText userFullName;
     private TextView userEmail;
@@ -44,7 +44,7 @@ public class UserAccountActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_useraccount);
+        setContentView(R.layout.activity_userprofile);
 
         userEmail = (TextView) findViewById(R.id.view_user_email);
         user_course = (Spinner) findViewById(R.id.course_spinner);

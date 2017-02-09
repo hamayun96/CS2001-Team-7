@@ -1,8 +1,8 @@
 /*
- * Created by Mohamed Bushra on 09/02/17 20:36
+ * Created by Mohamed Bushra on 09/02/17 21:13
  * Copyright (c) 2017. All rights reserved.
  *
- * Last Modified 09/02/17 20:33.
+ * Last Modified 09/02/17 21:12.
  */
 
 package uk.ac.brunel.tunel.activity;
@@ -53,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         if(mAuth.getCurrentUser() != null){
             //Close current page and open forum activity
             finish();
-            startActivity(new Intent(getApplicationContext(), UserAccountActivity.class));
+            startActivity(new Intent(getApplicationContext(), UserProfileActivity.class));
         }
 
     }

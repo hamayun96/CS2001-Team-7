@@ -1,8 +1,8 @@
 /*
- * Created by Mohamed Bushra on 08/02/17 17:02
+ * Created by Mohamed Bushra on 09/02/17 21:13
  * Copyright (c) 2017. All rights reserved.
  *
- * Last Modified 08/02/17 15:15.
+ * Last Modified 09/02/17 21:12.
  */
 
 package uk.ac.brunel.tunel.activity;
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
               and direct user to the forum
              */
             finish();
-            startActivity(new Intent(getApplicationContext(), UserAccountActivity.class));
+            startActivity(new Intent(getApplicationContext(), UserProfileActivity.class));
         }
 
         /*Assigning the 'Sign in' button to a click listener
