@@ -56,6 +56,7 @@ public class UserAccountActivity extends AppCompatActivity implements View.OnCli
         } else {
             user = mAuth.getCurrentUser();
         }
+        databaseReference = FirebaseDatabase.getInstance().getReference();
 
         userEmail = (TextView) findViewById(R.id.view_user_email);
 
@@ -83,6 +84,7 @@ public class UserAccountActivity extends AppCompatActivity implements View.OnCli
         // Save info to firebase
         UserInformation userInformation = new UserInformation(name, course,
                 course_year, student_id);
+
         databaseReference.child(user.getUid()).setValue(userInformation);
         // save user email to database
         databaseReference.child(user.getUid()).child("email").setValue(user.getEmail());
