@@ -1,8 +1,8 @@
 /*
- * Created by Mohamed Bushra on 08/02/17 17:02
+ * Created by Mohamed Bushra on 09/02/17 20:36
  * Copyright (c) 2017. All rights reserved.
  *
- * Last Modified 08/02/17 15:15.
+ * Last Modified 09/02/17 20:36.
  */
 
 package uk.ac.brunel.tunel.activity;
@@ -81,6 +81,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
+
     private void userSignIn()
     {
         String email = userEmail.getText().toString().trim();
@@ -88,12 +89,12 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
         //Check if the fields email and/or password are empty
         if(TextUtils.isEmpty(email)){
-            Toast.makeText(this,"Please enter your email",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Please enter a valid email",Toast.LENGTH_LONG).show();
             return;
         }
 
-        if(TextUtils.isEmpty(password)){
-            Toast.makeText(this,"Please enter your password",Toast.LENGTH_LONG).show();
+        if(TextUtils.isEmpty(password) || password.length()<8){
+            Toast.makeText(this,"Please enter a valid password",Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -115,8 +116,9 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                                     UserAccountActivity.class));
                         }
 
-                        else if (!task.isSuccessful())
+                        else if(!task.isSuccessful())
                         {
+
 
                         }
                     }

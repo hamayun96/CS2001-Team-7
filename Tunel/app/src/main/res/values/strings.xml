@@ -1,8 +1,8 @@
 <!--
-  ~ Created by Mohamed Bushra on 08/02/17 17:02
+  ~ Created by Mohamed Bushra on 09/02/17 20:36
   ~ Copyright (c) 2017. All rights reserved.
   ~
-  ~ Last Modified 08/02/17 15:15.
+  ~ Last Modified 09/02/17 18:47.
   -->
 
 <resources>
@@ -22,17 +22,35 @@
     <string name="last_name">Last Name</string>
     <string name="register">Register</string>
     <string name="sign_up_for_tun_l">Sign up for Tunél</string>
+    <string name="logout">Logout</string>
+    <string name="save_information">Save Information</string>
+    <string name="welcome_to_tun_l">Welcome to Tunél</string>
 
 
     <string-array name="course_level">
         <item>Select your course level</item>
         <item>Computer Science</item>
+        <item>Computer Science (Artificial Intelligence</item>
+        <item>Computer Science (Digital Media and Games)</item>
+        <item>Computer Science (Network Computing)</item>
+        <item>Computer Science (Software Engineering)</item>
+
+    </string-array>
+
+    <string-array name="course_year">
+        <item>Select your year</item>
+        <item>Level 0</item>
+        <item>Level 1</item>
+        <item>Level 2</item>
+        <item>Level 3</item>
+        <item>Placement</item>
 
     </string-array>
 
     <string-array name="gta_pal">
         <item>PAL Member</item>
         <item>GTA</item>
+        <item>PAL</item>
     </string-array>
 
 

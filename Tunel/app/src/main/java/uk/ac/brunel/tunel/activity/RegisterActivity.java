@@ -1,8 +1,8 @@
 /*
- * Created by Mohamed Bushra on 08/02/17 17:02
+ * Created by Mohamed Bushra on 09/02/17 20:36
  * Copyright (c) 2017. All rights reserved.
  *
- * Last Modified 08/02/17 16:21.
+ * Last Modified 09/02/17 20:33.
  */
 
 package uk.ac.brunel.tunel.activity;
@@ -58,26 +58,28 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
+
     private void registerUser() {
         String email = userEmail.getText().toString().trim();
         String password = userPassword.getText().toString().trim();
         String password_val = userPasswordVal.getText().toString().trim();
 
+
         //Check if the fields email and/or password are empty
         if(TextUtils.isEmpty(email)){
-            Toast.makeText(this,"Please enter a email",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Please enter a valid email!",Toast.LENGTH_LONG).show();
             return;
         }
 
-        if(TextUtils.isEmpty(password)){
-            Toast.makeText(this,"Please enter a password",Toast.LENGTH_LONG).show();
+        if(TextUtils.isEmpty(password) || password.length()<8){
+            Toast.makeText(this,"Please enter a valid password of min 8 characters!",Toast.LENGTH_LONG).show();
             return;
         }
 
         //Validate the password entered by the user
         if(!password_val.equals(password))
         {
-            Toast.makeText(this,"Passwords don't match",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Passwords don't match, please try again!",Toast.LENGTH_LONG).show();
             return;
         }
 
