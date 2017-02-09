@@ -41,24 +41,26 @@ public class UserAccountActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_useraccount);
 
-        userEmail = (TextView) findViewById(R.id.view_user_email);
-        btnLogout = (Button) findViewById(R.id.btnLogout);
         mAuth = FirebaseAuth.getInstance();
-        btnLogout.setOnClickListener(this);
 
         /*
           Checking if the user is not logged in
          */
         if(mAuth.getCurrentUser() == null){
             /*
-              If user is logged in, close this activity
+              If user is NOT logged in, close this activity
               and direct user to the sign in page
              */
             finish();
             startActivity(new Intent(this, SignInActivity.class));
+        } else {
+            user = mAuth.getCurrentUser();
         }
 
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+        userEmail = (TextView) findViewById(R.id.view_user_email);
+
+        btnLogout = (Button) findViewById(R.id.btnLogout);
+        btnLogout.setOnClickListener(this);
 
         userEmail = (TextView) findViewById(R.id.view_user_email);
         userFullName = (EditText) findViewById(R.id.fullName);
@@ -68,9 +70,7 @@ public class UserAccountActivity extends AppCompatActivity implements View.OnCli
         btnSaveInfo = (Button) findViewById(R.id.save_info);
         btnSaveInfo.setOnClickListener(this);
 
-         FirebaseUser user = mAuth.getCurrentUser();
         userEmail.setText("Hello "+ user.getEmail());
-
     }
 
     private void savedUserInfo()
@@ -80,10 +80,12 @@ public class UserAccountActivity extends AppCompatActivity implements View.OnCli
         String course_year = userCourseYear.getText().toString().trim();
         String student_id = userStudentID.getText().toString().trim();
 
+        // Save info to firebase
         UserInformation userInformation = new UserInformation(name, course,
                 course_year, student_id);
-        FirebaseUser user = mAuth.getCurrentUser();
         databaseReference.child(user.getUid()).setValue(userInformation);
+        // save user email to database
+        databaseReference.child(user.getUid()).child("email").setValue(user.getEmail());
 
         Toast.makeText(this, "Saving information....", Toast.LENGTH_LONG).show();
 

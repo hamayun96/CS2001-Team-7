@@ -29,4 +29,21 @@ public class UserInformation {
         this.userCourse = userCourse;
         this.userCourseYear = userCourseYear;
     }
+
+    // we have to have public getters to save object to Firebase
+    public String getUserFullName() {
+        return userFullName;
+    }
+
+    public String getUserStudentID() {
+        return userStudentID;
+    }
+
+    public String getUserCourse() {
+        return userCourse;
+    }
+
+    public String getUserCourseYear() {
+        return userCourseYear;
+    }
 }
