@@ -1,4 +1,3 @@
-
 package uk.ac.brunel.tunel.activity;
 
 /**
@@ -45,7 +44,7 @@ public class QuestionAnswersActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Intent(QuestionAnswersActivity.this, QuestionAnswersActivity.class); // todo newQUESTIONS
+                startActivity(new Intent(QuestionAnswersActivity.this, AskQuestionActivity.class));
             }
         });
 

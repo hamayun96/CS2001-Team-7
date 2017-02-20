@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -29,11 +30,17 @@ public class QuestionListAdapter extends RecyclerView.Adapter<QuestionListAdapte
     }
 
     @Override
-    public void onBindViewHolder(QuestionViewHolder holder, int position) {
+    public void onBindViewHolder(final QuestionViewHolder holder, final int position) {
         if (position > -1 && position < questions.size()) {
             Question question = questions.get(position);
             holder.setQuestion(question.getQuestion());
             holder.setUserID(question.getUserID());
+            holder.layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(holder.layout.getContext(), "Question " + position + " selected!", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 
@@ -58,11 +65,13 @@ public class QuestionListAdapter extends RecyclerView.Adapter<QuestionListAdapte
      */
     public static class QuestionViewHolder extends RecyclerView.ViewHolder {
 
+        public View layout;
         private TextView textQuestion;
         private TextView textUserID;
 
         public QuestionViewHolder(View itemView) {
             super(itemView);
+            layout = itemView;
             textQuestion = (TextView) itemView.findViewById(R.id.text_question);
             textUserID = (TextView) itemView.findViewById(R.id.text_user_id);
         }

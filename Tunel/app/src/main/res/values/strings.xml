@@ -26,6 +26,7 @@
     <string name="save_information">Save Information</string>
     <string name="welcome_to_tun_l">Welcome to Tunél</string>
     <string name="questions_answers_title">Questions and Answers</string>
+    <string name="ask_question">Ask a question</string>
 
 
     <string-array name="course">
@@ -54,6 +55,7 @@
         <item>PAL</item>
         <item>None</item>
     </string-array>
+    <string name="title_activity_ask_question">AskQuestionActivity</string>
 
 
 </resources>

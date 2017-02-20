@@ -1,5 +1,7 @@
 package uk.ac.brunel.tunel.activity;
 
+import java.util.Date;
+
 /**
  * Created by falehalrashidi on 20/02/2017.
  */
@@ -15,11 +17,11 @@ public class Question {
     public Question() {
     }
 
-    public Question(String question, String userID, long timeCreated) {
+    public Question(String question, String userID) {
         this.question = question;
         this.userID = userID;
-        dateCreated = timeCreated;
-        dateModified = timeCreated;
+        dateCreated =  new Date().getTime();
+        dateModified = dateCreated;
     }
 
     public String getQuestion() {
