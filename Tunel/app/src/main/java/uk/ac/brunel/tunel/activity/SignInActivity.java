@@ -1,8 +1,8 @@
 /*
- * Created by Mohamed Bushra on 20/02/17 14:40
+ * Created by Mohamed Bushra on 20/02/17 16:44
  * Copyright (c) 2017. All rights reserved.
  *
- * Last Modified 20/02/17 14:34.
+ * Last Modified 20/02/17 16:43.
  */
 
 package uk.ac.brunel.tunel.activity;
@@ -54,6 +54,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         btnResetPass = (Button) findViewById(forgotpassword);
 
         btnLogin.setOnClickListener(this);
+        btnResetPass.setOnClickListener(this);
 
         // Progress dialog
         pDialog = new ProgressDialog(this);
@@ -85,7 +86,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             return;
         }
 
-        if(TextUtils.isEmpty(password) || password.length()<8){
+        if(TextUtils.isEmpty(password) || password.length()<6){
             Toast.makeText(this,"Please enter a valid password",Toast.LENGTH_LONG).show();
             return;
         }

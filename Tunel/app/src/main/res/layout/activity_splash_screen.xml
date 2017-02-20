@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Mohamed Bushra on 20/02/17 14:40
+  ~ Created by Mohamed Bushra on 20/02/17 16:44
   ~ Copyright (c) 2017. All rights reserved.
   ~
-  ~ Last Modified 19/02/17 12:07.
+  ~ Last Modified 20/02/17 16:21.
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -18,7 +18,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:src="@mipmap/tunellogo"
+        android:src="@mipmap/tunellogo1"
         android:contentDescription=""
         tools:ignore="ContentDescription"
         android:id="@+id/imageView"

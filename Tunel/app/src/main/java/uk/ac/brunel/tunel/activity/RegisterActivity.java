@@ -1,8 +1,8 @@
 /*
- * Created by Mohamed Bushra on 20/02/17 14:40
+ * Created by Mohamed Bushra on 20/02/17 16:44
  * Copyright (c) 2017. All rights reserved.
  *
- * Last Modified 20/02/17 14:36.
+ * Last Modified 20/02/17 16:43.
  */
 
 package uk.ac.brunel.tunel.activity;
@@ -29,7 +29,7 @@ import uk.ac.brunel.tunel.R;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private Button btnSignup;
+    private Button btnSignup, btnBack;
     private EditText userEmail, userPassword, userPasswordVal;
     private ProgressDialog progressDialog;
     private FirebaseAuth mAuth;
@@ -45,9 +45,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         userPassword = (EditText) findViewById(R.id.reg_pass);
         userPasswordVal = (EditText) findViewById(R.id.reg_pass_val);
         btnSignup = (Button) findViewById(R.id.reg_button);
+        btnBack = (Button) findViewById(R.id.btn_back);
 
         mAuth = FirebaseAuth.getInstance();
         btnSignup.setOnClickListener(this);
+        btnBack.setOnClickListener(this);
         progressDialog = new ProgressDialog(this);
 
         //Check if user is already logged in
@@ -71,7 +73,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             return;
         }
 
-        if(TextUtils.isEmpty(password) || password.length()<8){
+        if(TextUtils.isEmpty(password) || password.length()<6){
             Toast.makeText(this,"Please enter a valid password of min 8 characters!",Toast.LENGTH_LONG).show();
             return;
         }
@@ -109,10 +111,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                 }
                             });
                             // Launch login activity
-                            Intent intent = new Intent(
+                            Intent loginIntent = new Intent(
                                     RegisterActivity.this,
                                     SignInActivity.class);
-                            startActivity(intent);
+                            startActivity(loginIntent);
                             finish();
                         }else{
 
@@ -129,6 +131,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         if(v == btnSignup)
         {
             registerUser();
+        }
+
+        if(v == btnBack)
+        {
+            finish();
+
         }
 
     }

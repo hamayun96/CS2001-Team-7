@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Mohamed Bushra on 20/02/17 14:40
+  ~ Created by Mohamed Bushra on 20/02/17 16:44
   ~ Copyright (c) 2017. All rights reserved.
   ~
-  ~ Last Modified 20/02/17 13:38.
+  ~ Last Modified 20/02/17 16:41.
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -23,7 +23,7 @@
     <ImageView
         android:layout_width="400dp"
         android:layout_height="300dp"
-        app:srcCompat="@mipmap/tunellogo"
+        app:srcCompat="@mipmap/tunellogo1"
         android:id="@+id/tunellogo"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
@@ -60,14 +60,14 @@
         android:inputType="textPassword"
         android:hint="@string/password"
         android:ems="10"
-        android:minLines="8"
+        android:minLines="6"
         android:id="@+id/log_pass"
         android:layout_below="@+id/log_email"
         android:layout_alignParentStart="true"
         android:layout_marginTop="18dp" />
 
     <Button
-        android:background="@android:color/transparent"
+        android:background="@null"
         android:text="@string/forgot_password"
         android:textSize="16sp"
         android:textStyle="italic"
@@ -77,6 +77,7 @@
         android:layout_below="@+id/log_pass"
         android:layout_alignParentStart="true"
         android:layout_marginTop="23dp" />
+
 
     <Button
         android:background="#2471A3"
