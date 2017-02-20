@@ -1,8 +1,8 @@
 /*
- * Created by Mohamed Bushra on 09/02/17 20:36
+ * Created by Mohamed Bushra on 20/02/17 14:40
  * Copyright (c) 2017. All rights reserved.
  *
- * Last Modified 09/02/17 18:40.
+ * Last Modified 19/02/17 12:07.
  */
 
 package uk.ac.brunel.tunel.activity;
@@ -13,22 +13,24 @@ package uk.ac.brunel.tunel.activity;
 
 public class UserInformation {
 
-    public String userFullName;
-    public String userStudentID;
-    public String userCourse;
-    public String userCourseYear;
-    public String usergtaPal;
+    public String first_name;
+    public String last_name;
+    public String studentID;
+    public String course;
+    public String course_year;
+    public String usertype;
 
     public UserInformation(){
 
     }
 
-    public UserInformation(String userFullName, String userStudentID, String userCourse,
-                           String userCourseYear, String usergtaPal) {
-        this.userFullName = userFullName;
-        this.userStudentID = userStudentID;
-        this.userCourse = userCourse;
-        this.userCourseYear = userCourseYear;
-        this.usergtaPal = usergtaPal;
+    public UserInformation(String first_name, String last_name, String studentID, String course,
+                           String course_year, String usertype) {
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.studentID = studentID;
+        this.course = course;
+        this.course_year = course_year;
+        this.usertype = usertype;
     }
 }

@@ -1,8 +1,8 @@
 /*
- * Created by Mohamed Bushra on 09/02/17 21:13
+ * Created by Mohamed Bushra on 20/02/17 14:40
  * Copyright (c) 2017. All rights reserved.
  *
- * Last Modified 09/02/17 21:12.
+ * Last Modified 20/02/17 14:11.
  */
 
 package uk.ac.brunel.tunel.activity;
@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -34,26 +35,24 @@ public class MainActivity extends AppCompatActivity {
 
         // Check if user is already logged in
         if(mAuth.getCurrentUser() != null){
-            /*
-              If user is logged in, close this activity
-              and direct user to the forum
-             */
+            Toast.makeText(MainActivity.this,"Welcome back "+ mAuth.getCurrentUser().getEmail(),
+                    Toast.LENGTH_LONG).show();
+            //If user is logged in, close this activity
+            // and direct user to the forum
             finish();
             startActivity(new Intent(getApplicationContext(), UserProfileActivity.class));
         }
 
-        /*Assigning the 'Sign in' button to a click listener
-        so it takes the user to the next screen
-         */
+        //Assigning the 'Sign in' button to a click listener
+        // so it takes the user to the next screen
         ButtonSignIn = (Button) findViewById(R.id.sign_in);
         ButtonSignIn.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                /* Setting a new intent which takes the user from the current screen
-                to the next (Main --> Sign in screen)
-                 */
+                //Setting a new intent which takes the user from the current screen
+                // to the next (Main --> Sign in screen)
                 Intent SignInIntent = new Intent(MainActivity.this, SignInActivity.class);
                 startActivity(SignInIntent);
             }
@@ -65,9 +64,8 @@ public class MainActivity extends AppCompatActivity {
         {
             public void onClick(View v)
             {
-                /* Setting a new intent which takes the user from the current screen
-                to the next (Sign in --> Sign up screen)
-                 */
+                //Setting a new intent which takes the user from the current screen
+                // to the next (Sign in --> Sign up screen)
                 Intent RegisterIntent = new Intent(MainActivity.this, RegisterActivity.class);
                 startActivity(RegisterIntent);
 

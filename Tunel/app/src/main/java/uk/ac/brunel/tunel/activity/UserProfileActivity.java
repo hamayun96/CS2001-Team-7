@@ -1,8 +1,8 @@
 /*
- * Created by Mohamed Bushra on 09/02/17 21:13
+ * Created by Mohamed Bushra on 20/02/17 14:40
  * Copyright (c) 2017. All rights reserved.
  *
- * Last Modified 09/02/17 21:12.
+ * Last Modified 20/02/17 14:36.
  */
 
 package uk.ac.brunel.tunel.activity;
@@ -27,18 +27,17 @@ import uk.ac.brunel.tunel.R;
 
 public class UserProfileActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private EditText userFullName;
-    private TextView userEmail;
-    private EditText userStudentID;
+    private EditText first_name;
+    private EditText last_name;
+    private TextView useremail;
+    private EditText studentID;
     private Button btnLogout, btnSaveInfo;
-    private FirebaseAuth mAuth;
-    private FirebaseUser user;
+    private FirebaseAuth authRef;
+    private FirebaseUser userRef;
     private DatabaseReference databaseReference;
-    private Spinner user_course;
-    private Spinner user_courseyear;
-    private Spinner gtaPal;
-
-
+    private Spinner course;
+    private Spinner course_year;
+    private Spinner usertype;
 
 
     @Override
@@ -46,85 +45,90 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_userprofile);
 
-        userEmail = (TextView) findViewById(R.id.view_user_email);
-        user_course = (Spinner) findViewById(R.id.course_spinner);
-        user_courseyear = (Spinner) findViewById(R.id.courseyear_spinner);
-        gtaPal = (Spinner) findViewById(R.id.gtapal_spinner);
+        useremail = (TextView) findViewById(R.id.view_user_email);
+        course = (Spinner) findViewById(R.id.course_spinner);
+        course_year = (Spinner) findViewById(R.id.courseyear_spinner);
+        usertype = (Spinner) findViewById(R.id.gtapal_spinner);
         btnLogout = (Button) findViewById(R.id.btnLogout);
-        mAuth = FirebaseAuth.getInstance();
+        authRef = FirebaseAuth.getInstance();
         btnLogout.setOnClickListener(this);
 
-        /*Create an ArrayAdapter using the string array and a default spinner layout
-        Create an ArrayAdapter using the string array and a default spinner layout\
-        Apply the adapter to the spinner
-         */
+        //Create an ArrayAdapter using the string array and a default spinner layout
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        // Apply the adapter to the spinner
         ArrayAdapter<CharSequence> course_adapter = ArrayAdapter.createFromResource(this,
-                R.array.course_level, android.R.layout.simple_spinner_item);
+                R.array.course, android.R.layout.simple_spinner_item);
         course_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        user_course.setAdapter(course_adapter);
+        course.setAdapter(course_adapter);
 
         ArrayAdapter<CharSequence> courseyear_adapter = ArrayAdapter.createFromResource(this,
                 R.array.course_year, android.R.layout.simple_spinner_item);
         courseyear_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        user_courseyear.setAdapter(courseyear_adapter);
+        course_year.setAdapter(courseyear_adapter);
 
         ArrayAdapter<CharSequence> gtapal_adapter = ArrayAdapter.createFromResource(this,
                 R.array.gta_pal, android.R.layout.simple_spinner_item);
         course_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        gtaPal.setAdapter(gtapal_adapter);
+        usertype.setAdapter(gtapal_adapter);
 
-        /*
-          Checking if the user is not logged in
-         */
-        if(mAuth.getCurrentUser() == null){
-            /*
-              If user is logged in, close this activity
-              and direct user to the sign in page
-             */
+        //Checking if the user is not logged in
+
+        if(authRef.getCurrentUser() == null){
+            //If user is logged in, close this activity
+            // and direct user to the sign in page
             finish();
             startActivity(new Intent(this, SignInActivity.class));
         }
 
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference = FirebaseDatabase.getInstance().getReference("users");
 
-        userEmail = (TextView) findViewById(R.id.view_user_email);
-        userFullName = (EditText) findViewById(R.id.fullName);
-        user_course = (Spinner) findViewById(R.id.course_spinner);
-        user_courseyear = (Spinner) findViewById(R.id.courseyear_spinner);
-        gtaPal = (Spinner) findViewById(R.id.gtapal_spinner);
-        userStudentID = (EditText) findViewById(R.id.student_ID);
+        useremail = (TextView) findViewById(R.id.view_user_email);
+        first_name = (EditText) findViewById(R.id.first_name);
+        last_name = (EditText) findViewById(R.id.last_name);
+        course = (Spinner) findViewById(R.id.course_spinner);
+        course_year = (Spinner) findViewById(R.id.courseyear_spinner);
+        usertype = (Spinner) findViewById(R.id.gtapal_spinner);
+        studentID = (EditText) findViewById(R.id.student_ID);
         btnSaveInfo = (Button) findViewById(R.id.save_info);
         btnSaveInfo.setOnClickListener(this);
 
-         FirebaseUser user = mAuth.getCurrentUser();
-        userEmail.setText("Hello "+ user.getEmail());
+        userRef = authRef.getCurrentUser();
+        useremail.setText("Hello "+ userRef.getEmail());
 
     }
 
-    private void savedUserInfo()
+    private void createUser()
     {
-        String name = userFullName.getText().toString().trim();
-        String course = user_course.getSelectedItem().toString().trim();
-        String course_year = user_courseyear.getSelectedItem().toString().trim();
-        String student_id = userStudentID.getText().toString().trim();
-        String user_gtapal = gtaPal.getSelectedItem().toString().trim();
+        String fname = first_name.getText().toString().trim();
+        String lname = last_name.getText().toString().trim();
+        String usercourse = course.getSelectedItem().toString().trim();
+        String usercourse_year = course_year.getSelectedItem().toString().trim();
+        String student_id = studentID.getText().toString().trim();
+        String user_type = usertype.getSelectedItem().toString().trim();
 
-        UserInformation userInformation = new UserInformation(name, course,
-                course_year, student_id, user_gtapal);
-        FirebaseUser user = mAuth.getCurrentUser();
-        databaseReference.child(user.getUid()).setValue(userInformation);
+        // creating user object
+        UserInformation userInformation = new UserInformation(fname, lname, student_id, usercourse,
+                usercourse_year, user_type);
+
+        //Creating new user node, which returns the unique key value
+        //new user node would be /users/$uid/
+        userRef = authRef.getCurrentUser();
+
+        // pushing userinformation to 'users' node using the userUID
+        //If changes will be made by the user, we get the UID so no new node is created
+        databaseReference.child(userRef.getUid()).setValue(userInformation);
 
         Toast.makeText(this, "Saving information....", Toast.LENGTH_LONG).show();
 
-
     }
+
 
     @Override
     public void onClick(View v) {
 
         if(v ==btnLogout) {
 
-            mAuth.signOut();
+            authRef.signOut();
             finish();
             //Send user to sign in screen
             startActivity(new Intent(this, SignInActivity.class));
@@ -133,7 +137,7 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
 
         if(v == btnSaveInfo)
         {
-            savedUserInfo();
+            createUser();
         }
 
     }

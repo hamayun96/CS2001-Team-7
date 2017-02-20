@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Mohamed Bushra on 09/02/17 21:13
+  ~ Created by Mohamed Bushra on 20/02/17 14:40
   ~ Copyright (c) 2017. All rights reserved.
   ~
-  ~ Last Modified 09/02/17 21:12.
+  ~ Last Modified 20/02/17 09:59.
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -18,33 +18,27 @@
     android:background="#FFFFFF"
     tools:context="uk.ac.brunel.tunel.activity.UserProfileActivity">
 
-    <EditText
-            android:background="#F9F9F9"
-            android:layout_width="300dp"
-            android:layout_height="35dp"
-            android:inputType="number"
-            android:ems="10"
-            android:maxLines="7"
-            android:id="@+id/student_ID"
-            android:hint="  Student ID"
-            tools:ignore="HardcodedText"
-            android:layout_marginTop="23dp"
-            android:layout_below="@+id/fullName"
-            android:layout_alignStart="@+id/fullName" />
+    <ScrollView
+        android:layout_width="500dp"
+        android:layout_height="700dp">
+        <RelativeLayout
+            android:layout_width="400dp"
+            android:layout_height="800dp">
 
-    <Button
-        android:background="#2471A3"
-        android:textColor="#fff"
-        android:textStyle="bold"
-        android:id="@+id/btnLogout"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="@string/logout"
-        android:textAllCaps="false"
-        android:textSize="25sp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp" />
+
+    <EditText
+        android:background="#F9F9F9"
+        android:layout_width="370dp"
+        android:layout_height="45dp"
+        android:inputType="number"
+        android:ems="10"
+        android:maxLines="7"
+        android:id="@+id/student_ID"
+        android:hint="  Student ID"
+        tools:ignore="HardcodedText"
+        android:layout_marginTop="18dp"
+        android:layout_below="@+id/last_name"
+        android:layout_alignStart="@+id/first_name" />
 
     <TextView
         android:textColor="#2471A3"
@@ -71,37 +65,88 @@
 
     <EditText
         android:background="#F9F9F9"
-        android:layout_width="300dp"
-        android:layout_height="35dp"
+        android:layout_width="370dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="18dp"
         android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/fullName"
-        android:hint="  Full Name"
-        android:maxLines="1"
-        android:layout_marginTop="22dp"
+        android:hint=" Surname"
+        android:id="@+id/last_name"
         tools:ignore="HardcodedText"
-        android:layout_below="@+id/view_user_email"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/first_name"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/student_ID" />
 
     <Spinner
         android:background="#F9F9F9"
-        android:layout_width="300dp"
-        android:layout_height="35dp"
+        android:layout_width="370dp"
+        android:layout_height="45dp"
         android:id="@+id/courseyear_spinner"
         android:layout_below="@+id/course_spinner"
         android:layout_alignStart="@+id/course_spinner"
-        android:layout_marginTop="21dp" />
+        android:layout_marginTop="18dp"
+        android:layout_alignEnd="@+id/course_spinner" />
 
     <Spinner
         android:background="#F9F9F9"
         android:id="@+id/course_spinner"
-        android:layout_width="300dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="370dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="18dp"
         android:layout_below="@+id/student_ID"
-        android:layout_alignStart="@+id/student_ID" />
+        android:layout_alignStart="@+id/student_ID"
+        android:layout_alignEnd="@+id/student_ID" />
+
+    <Spinner
+        android:background="#F9F9F9"
+        android:layout_width="400dp"
+        android:layout_height="45dp"
+        android:id="@+id/gtapal_spinner"
+        android:layout_below="@+id/gtapalmes"
+        android:layout_alignStart="@+id/courseyear_spinner"
+        android:layout_marginTop="15dp"
+        android:layout_alignEnd="@+id/courseyear_spinner" />
+
+    <TextView
+        android:text="Are you a GTA, PAL or none?"
+        android:textSize="15sp"
+        android:textStyle="bold|italic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/gtapalmes"
+        android:layout_alignStart="@id/courseyear_spinner"
+        android:layout_below="@id/courseyear_spinner"
+        android:layout_toStartOf="@+id/view_user_email"
+        android:layout_marginTop="18dp"
+        android:layout_alignEnd="@+id/gtapal_spinner" />
+
+            <EditText
+        android:background="#F9F9F9"
+        android:layout_width="370dp"
+        android:layout_height="45dp"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/first_name"
+        android:hint=" First Name"
+        android:layout_marginTop="7dp"
+        tools:ignore="HardcodedText"
+        android:layout_below="@+id/view_user_email"
+        android:layout_alignParentStart="true" />
 
     <Button
+        android:background="#2471A3"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:id="@+id/btnLogout"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/logout"
+        android:textAllCaps="false"
+        android:textSize="25sp"
+        android:layout_below="@+id/save_info"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="33dp" />
+
+            <Button
         android:background="#2471A3"
         android:textColor="#fff"
         android:textSize="25sp"
@@ -110,29 +155,12 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:id="@+id/save_info"
-        android:layout_marginBottom="19dp"
-        android:layout_above="@+id/btnLogout"
-        android:layout_alignStart="@+id/gtapal_spinner" />
+                android:layout_below="@+id/gtapal_spinner"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="17dp" />
 
-    <TextView
-        android:text="Are you a GTA or PAL?"
-        android:textSize="15sp"
-        android:textStyle="bold|italic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:id="@+id/gtapalmes"
-        android:layout_below="@+id/courseyear_spinner"
-        android:layout_alignStart="@+id/gtapal_spinner" />
-
-    <Spinner
-        android:background="#F9F9F9"
-        android:layout_width="300dp"
-        android:layout_height="35dp"
-        android:id="@+id/gtapal_spinner"
-        android:layout_below="@+id/gtapalmes"
-        android:layout_alignStart="@+id/courseyear_spinner"
-        android:layout_marginTop="9dp" />
+        </RelativeLayout>
+    </ScrollView>
 
 
 </RelativeLayout>

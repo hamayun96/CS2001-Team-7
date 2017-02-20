@@ -1,8 +1,8 @@
 /*
- * Created by Mohamed Bushra on 09/02/17 21:13
+ * Created by Mohamed Bushra on 20/02/17 14:40
  * Copyright (c) 2017. All rights reserved.
  *
- * Last Modified 09/02/17 21:12.
+ * Last Modified 20/02/17 14:34.
  */
 
 package uk.ac.brunel.tunel.activity;
@@ -23,9 +23,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import uk.ac.brunel.tunel.R;
 
+import static uk.ac.brunel.tunel.R.id.forgotpassword;
 import static uk.ac.brunel.tunel.R.id.signup_button;
 
 
@@ -33,10 +35,12 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
     private Button btnLogin;
     private Button btnSignup;
+    private Button btnResetPass;
     private EditText userEmail;
     private EditText userPassword;
     private ProgressDialog pDialog;
     private FirebaseAuth mAuth;
+    private FirebaseUser userRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         userPassword = (EditText) findViewById(R.id.log_pass);
         btnLogin = (Button) findViewById(R.id.log_button);
         btnSignup = (Button) findViewById(signup_button);
+        btnResetPass = (Button) findViewById(forgotpassword);
 
         btnLogin.setOnClickListener(this);
 
@@ -55,17 +60,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         pDialog.setCancelable(false);
 
         mAuth = FirebaseAuth.getInstance();
-
-        // Check if user is already logged in
-        if(mAuth.getCurrentUser() != null){
-            /*
-              If user is logged in, close this activity
-              and direct user to the forum
-             */
-            finish();
-            startActivity(new Intent(getApplicationContext(), UserProfileActivity.class));
-        }
-
         btnSignup.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
@@ -80,8 +74,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         });
 
     }
-
-
     private void userSignIn()
     {
         String email = userEmail.getText().toString().trim();
@@ -106,30 +98,42 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         pDialog.dismiss();
-                        /*
-                        If the user signs in successfully
-                        we direct them to the forum activity
-                         */
-                        if(task.isSuccessful()){
+                        // If the user is verified
+                        // we direct them to the forum activity
+                        userRef = FirebaseAuth.getInstance().getCurrentUser();
+                        if(task.isSuccessful() && userRef.isEmailVerified()){
+                            Toast.makeText(SignInActivity.this,"Welcome back "+
+                                    mAuth.getCurrentUser().getEmail(),
+                                    Toast.LENGTH_LONG).show();
                             finish();
                             startActivity(new Intent(getApplicationContext(),
                                     UserProfileActivity.class));
                         }
 
+                        else if(!userRef.isEmailVerified())
+                        {
+                            Toast.makeText(SignInActivity.this,"Your email has not been verified ",
+                                    Toast.LENGTH_LONG).show();
+                        }
+
                         else if(!task.isSuccessful())
                         {
-
-
+                            Toast.makeText(SignInActivity.this,"Login failed",
+                                    Toast.LENGTH_LONG).show();
                         }
                     }
                 });
-
     }
-
     @Override
     public void onClick(View v) {
         if (v == btnLogin) {
             userSignIn();
+        }
+
+        if ( v == btnResetPass)
+        {
+            Intent resetPassIntent = new Intent(SignInActivity.this, ResetPassActivity.class);
+            startActivity(resetPassIntent);
         }
 
     }

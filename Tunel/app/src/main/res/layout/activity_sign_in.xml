@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Mohamed Bushra on 09/02/17 20:36
+  ~ Created by Mohamed Bushra on 20/02/17 14:40
   ~ Copyright (c) 2017. All rights reserved.
   ~
-  ~ Last Modified 09/02/17 20:25.
+  ~ Last Modified 20/02/17 13:38.
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -45,7 +45,7 @@
     <EditText
         android:background="#F9F9F9"
         android:layout_width="800dp"
-        android:layout_height="40dp"
+        android:layout_height="45dp"
         android:inputType="textEmailAddress"
         android:hint="@string/email"
         android:ems="10"
@@ -56,7 +56,7 @@
     <EditText
         android:background="#F9F9F9"
         android:layout_width="800dp"
-        android:layout_height="40dp"
+        android:layout_height="45dp"
         android:inputType="textPassword"
         android:hint="@string/password"
         android:ems="10"

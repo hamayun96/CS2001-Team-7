@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "607605761699-375o201be8jcd8j89r8o8912q9npee4r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uk.ac.brunel.tunel",
+            "certificate_hash": "E701AF17ED46516B6855F523A1285DF136D636F1"
+          }
+        },
+        {
           "client_id": "607605761699-0hq4faji8kkle0de008222t4fr12r8kd.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "607605761699-0hq4faji8kkle0de008222t4fr12r8kd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

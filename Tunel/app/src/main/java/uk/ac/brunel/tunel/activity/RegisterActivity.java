@@ -1,8 +1,8 @@
 /*
- * Created by Mohamed Bushra on 09/02/17 21:13
+ * Created by Mohamed Bushra on 20/02/17 14:40
  * Copyright (c) 2017. All rights reserved.
  *
- * Last Modified 09/02/17 21:12.
+ * Last Modified 20/02/17 14:36.
  */
 
 package uk.ac.brunel.tunel.activity;
@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import uk.ac.brunel.tunel.R;
 
@@ -32,7 +33,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private EditText userEmail, userPassword, userPasswordVal;
     private ProgressDialog progressDialog;
     private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseUser userRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -57,7 +58,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
 
     }
-
 
     private void registerUser() {
         String email = userEmail.getText().toString().trim();
@@ -94,8 +94,20 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         Checking if user has successfully registered
                          */
                         if(task.isSuccessful()){
-                            Toast.makeText(RegisterActivity.this,"Successfully registered",
-                                    Toast.LENGTH_LONG).show();
+
+                            // If the user has successfully registered
+                            // a verification email will be sent to them
+                            userRef = FirebaseAuth.getInstance().getCurrentUser();
+                            userRef.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(RegisterActivity.this,"Successfully registered! verify " +
+                                                        "your email",
+                                                Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
                             // Launch login activity
                             Intent intent = new Intent(
                                     RegisterActivity.this,
@@ -110,7 +122,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         progressDialog.dismiss();
                     }
                 });
-
     }
 
     @Override

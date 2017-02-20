@@ -1,8 +1,8 @@
 <!--
-  ~ Created by Mohamed Bushra on 09/02/17 20:36
+  ~ Created by Mohamed Bushra on 20/02/17 14:40
   ~ Copyright (c) 2017. All rights reserved.
   ~
-  ~ Last Modified 09/02/17 18:47.
+  ~ Last Modified 19/02/17 12:07.
   -->
 
 <resources>
@@ -27,7 +27,7 @@
     <string name="welcome_to_tun_l">Welcome to Tunél</string>
 
 
-    <string-array name="course_level">
+    <string-array name="course">
         <item>Select your course level</item>
         <item>Computer Science</item>
         <item>Computer Science (Artificial Intelligence</item>
@@ -51,6 +51,7 @@
         <item>PAL Member</item>
         <item>GTA</item>
         <item>PAL</item>
+        <item>None</item>
     </string-array>
 
 
