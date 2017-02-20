@@ -25,6 +25,7 @@
     <string name="logout">Logout</string>
     <string name="save_information">Save Information</string>
     <string name="welcome_to_tun_l">Welcome to Tunél</string>
+    <string name="questions_answers_title">Questions and Answers</string>
 
 
     <string-array name="course">

@@ -45,6 +45,15 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_userprofile);
 
+        // TODO - remove when navigation menu works!
+        TextView textLink = (TextView) findViewById(R.id.welcome_msg);
+        textLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(UserProfileActivity.this, QuestionAnswersActivity.class));
+            }
+        });
+
         useremail = (TextView) findViewById(R.id.view_user_email);
         course = (Spinner) findViewById(R.id.course_spinner);
         course_year = (Spinner) findViewById(R.id.courseyear_spinner);
