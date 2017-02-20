@@ -102,7 +102,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                         // If the user is verified
                         // we direct them to the forum activity
                         userRef = FirebaseAuth.getInstance().getCurrentUser();
-                        if(task.isSuccessful() && userRef.isEmailVerified()){
+                        if(task.isSuccessful()) { // && userRef.isEmailVerified()){
                             Toast.makeText(SignInActivity.this,"Welcome back "+
                                     mAuth.getCurrentUser().getEmail(),
                                     Toast.LENGTH_LONG).show();

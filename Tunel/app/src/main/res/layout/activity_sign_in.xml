@@ -23,7 +23,7 @@
     <ImageView
         android:layout_width="400dp"
         android:layout_height="300dp"
-        app:srcCompat="@mipmap/tunellogo1"
+        app:srcCompat="@mipmap/tunellogo"
         android:id="@+id/tunellogo"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"

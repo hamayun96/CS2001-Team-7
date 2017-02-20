@@ -70,7 +70,7 @@
         <ImageView
             android:layout_width="500dp"
             android:layout_height="240dp"
-            app:srcCompat="@mipmap/logononame"
+            app:srcCompat="@mipmap/tunellogo"
             android:id="@+id/register_logo"
             android:contentDescription="@string/tunellogo"
             android:layout_alignParentTop="true"

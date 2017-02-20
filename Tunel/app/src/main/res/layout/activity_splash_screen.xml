@@ -18,7 +18,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:src="@mipmap/tunellogo1"
+        android:src="@mipmap/tunellogo"
         android:contentDescription=""
         tools:ignore="ContentDescription"
         android:id="@+id/imageView"
