@@ -60,6 +60,8 @@ public class QuestionListAdapter extends RecyclerView.Adapter<QuestionListAdapte
     }
 
     /**
+     * Created by falehalrashidi on 20/02/2017.
+     *
      * We have to use a custom ViewHolder so that we can use the Android RecyclerView /
      * ViewHolder pattern. This class holds and re-draws the question layout.
      */
